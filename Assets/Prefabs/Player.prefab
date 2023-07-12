@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 5428757957489560476}
   - component: {fileID: 706184107932982768}
   - component: {fileID: 8295043586597449059}
+  - component: {fileID: 1168988481716718395}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -155,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 13.5
-  sprintMultiplier: 1.5
+  sprint: 2
 --- !u!195 &8295043586597449059
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -178,6 +179,32 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
+--- !u!143 &1168988481716718395
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9033944864753135869}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &9078441652053907248
 GameObject:
   m_ObjectHideFlags: 0

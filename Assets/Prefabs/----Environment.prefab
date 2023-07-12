@@ -133,7 +133,7 @@ Transform:
   - {fileID: 3641897151272883349}
   - {fileID: 3623983704709266168}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5292774907469670043
 GameObject:
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 7289551149394813204}
   - component: {fileID: 5249914849239367115}
   m_Layer: 0
-  m_Name: floor
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
