@@ -1,43 +1,72 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class PlayerMovement : MonoBehaviour
+public class CharacterMovement : MonoBehaviour
 {
-    public float baseSpeed = 5f; // Base speed at which the player moves
-    public float sprint = 2f; // Multiplier applied to the speed when sprinting
+    CharacterController controller;
+    //Animator anim;
+    Transform cam;
 
-    private NavMeshAgent navAgent;
-    private float currentSpeed; // Speed at which the player currently moves
+    float speedSmoothVelocity;
+    float speedSmoothTime;
+    float currentSpeed;
+    float velocityY;
+    Vector3 moveInput;
+    Vector3 dir;
 
-    private void Start()
+    [Header("Settings")]
+    [SerializeField] float gravity = 25f;
+    [SerializeField] float moveSpeed = 2f;
+    [SerializeField] float rotateSpeed = 3f;
+
+    public bool lockMovement;
+
+
+    void Start()
     {
-        navAgent = GetComponent<NavMeshAgent>();
-        currentSpeed = baseSpeed;
-        navAgent.speed = currentSpeed;
+        //anim = GetComponent<Animator>();
+        controller = GetComponent<CharacterController>(); 
+        cam = Camera.main.transform;   
     }
 
-    private void Update()
+    void Update()
     {
-        // Check for player input
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
+        GetInput();
+        PlayerMovement();
+        if(!lockMovement) PlayerRotation();
+    }
 
-        // Calculate movement direction based on player's forward direction
-        Vector3 movement = transform.forward * verticalInput + transform.right * horizontalInput;
-        movement.Normalize();
+    private void GetInput(){
+        moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        // Set NavMeshAgent destination
-        if (movement.magnitude > 0f)
-        {
-            Vector3 targetPosition = transform.position + movement;
-            navAgent.SetDestination(targetPosition);
-        }
+        Vector3 forward = cam.forward;
+        Vector3 right = cam.right;
+        forward.y = 0;
+        right.y = 0;
+        forward.Normalize();
+        right.Normalize();
 
-        // Check for sprint input
-        bool sprintInput = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        dir = (forward * moveInput.y + right * moveInput.x).normalized;
+    }
 
-        // Update the current speed based on sprint input
-        currentSpeed = sprintInput ? baseSpeed + sprint : baseSpeed;
-        navAgent.speed = currentSpeed;
+    private void PlayerMovement(){
+
+        currentSpeed = Mathf.SmoothDamp(currentSpeed, moveSpeed, ref speedSmoothVelocity, speedSmoothTime * Time.deltaTime);
+        
+        if(velocityY > -10) velocityY -=  Time.deltaTime * gravity;
+        Vector3 velocity = (dir  * currentSpeed) + Vector3.up * velocityY;
+
+        controller.Move(velocity * Time.deltaTime); 
+        
+        //anim.SetFloat("Movement", dir.magnitude, 0.1f, Time.deltaTime);
+        //anim.SetFloat("Horizontal", moveInput.x, 0.1f, Time.deltaTime);
+        //anim.SetFloat("Vertical", moveInput.y, 0.1f, Time.deltaTime);
+    }
+
+    private void PlayerRotation(){
+        if(dir.magnitude == 0) return;
+        Vector3 rotDir = new Vector3(dir.x, dir.y, dir.z);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir), Time.deltaTime * rotateSpeed);
     }
 }
