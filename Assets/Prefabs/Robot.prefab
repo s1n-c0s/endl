@@ -199,13 +199,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6958441524317563633
@@ -442,10 +442,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9211196674511659969}
-  - component: {fileID: 707292653253730190}
-  - component: {fileID: 2318931858253099914}
-  - component: {fileID: 3005667842910303868}
   - component: {fileID: 5428757957489560476}
+  - component: {fileID: 1282030599016351283}
   - component: {fileID: 1168988481716718395}
   m_Layer: 0
   m_Name: Robot
@@ -472,53 +470,6 @@ Transform:
   - {fileID: 5242718236947035903}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &707292653253730190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9033944864753135869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d8373b40a5869147af7d408ab0dfb07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyName: Enemy
-  description: This is an enemy.
-  maxHealth: 100
-  attackPower: 10
-  defense: 5
-  currentHealth: 0
---- !u!114 &2318931858253099914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9033944864753135869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8838aa8849db84441a7dfab04e37b5a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyInfo: {fileID: 707292653253730190}
---- !u!114 &3005667842910303868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9033944864753135869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd9a9472a02cd6c4aa00fa0c4ca4637d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyInfo: {fileID: 707292653253730190}
-  healthCanvas: {fileID: 4384379563656143074}
-  healthBarFill: {fileID: 3938498295794087716}
-  displayOffset: 2
 --- !u!136 &5428757957489560476
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -542,6 +493,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1282030599016351283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9033944864753135869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b415219e1d1af1e46ba21978164279ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: c23fc398eca6fc444ba2c0fcd6b89eb4, type: 2}
+  healthBarImage: {fileID: 3938498295794087716}
 --- !u!143 &1168988481716718395
 CharacterController:
   m_ObjectHideFlags: 0
