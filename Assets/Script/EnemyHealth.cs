@@ -1,49 +1,47 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public float maxHealth = 100f;
+    public EnemyData enemyData;
     private float currentHealth;
-    public Transform fillImage; // Reference to the custom fill Image's transform
 
-    // Start is called before the first frame update
+    public Image healthBarImage;
+
     void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = enemyData.maxHealth;
         UpdateHealthBar();
-        HideHealthBar(); // Hide the health bar at the start
     }
 
     public void TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
-        currentHealth = Mathf.Max(currentHealth, 0f);
+        currentHealth = Mathf.Clamp(currentHealth, 0f, enemyData.maxHealth);
+
         UpdateHealthBar();
 
-        if (currentHealth > 0f)
+        if (currentHealth <= 0f)
         {
-            ShowHealthBar(); // Show the health bar when damaged
+            Die();
         }
     }
 
-    public bool IsDead()
+    private void UpdateHealthBar()
     {
-        return currentHealth <= 0f;
+        float fillAmount = currentHealth / enemyData.maxHealth;
+        healthBarImage.fillAmount = fillAmount;
     }
 
-    void UpdateHealthBar()
+    public float GetCurrentHealth()
     {
-        float healthPercentage = currentHealth / maxHealth;
-        fillImage.localScale = new Vector3(healthPercentage, 1f, 1f);
+        return currentHealth;
     }
 
-    void ShowHealthBar()
+    private void Die()
     {
-        fillImage.gameObject.SetActive(true);
-    }
-
-    void HideHealthBar()
-    {
-        fillImage.gameObject.SetActive(false);
+        // Handle enemy death, e.g., play death animation, destroy enemy, etc.
+        Destroy(gameObject);
+        Debug.Log(">>>> Destroy Robot");
     }
 }
