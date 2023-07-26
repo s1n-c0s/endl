@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     CharacterController controller;
-    //Animator anim;
     Transform cam;
 
     float speedSmoothVelocity;
@@ -22,22 +21,24 @@ public class PlayerController : MonoBehaviour
 
     public bool lockMovement;
 
+    [Header("Player Data")]
+    private PlayerData playerData;
 
     void Start()
     {
-        //anim = GetComponent<Animator>();
-        controller = GetComponent<CharacterController>(); 
-        cam = Camera.main.transform;   
+        controller = GetComponent<CharacterController>();
+        cam = Camera.main.transform;
     }
 
     void Update()
     {
         GetInput();
         PlayerMovement();
-        if(!lockMovement) PlayerRotation();
+        if (!lockMovement) PlayerRotation();
     }
 
-    private void GetInput(){
+    private void GetInput()
+    {
         moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         Vector3 forward = cam.forward;
@@ -50,23 +51,30 @@ public class PlayerController : MonoBehaviour
         dir = (forward * moveInput.y + right * moveInput.x).normalized;
     }
 
-    private void PlayerMovement(){
-
+    private void PlayerMovement()
+    {
         currentSpeed = Mathf.SmoothDamp(currentSpeed, moveSpeed, ref speedSmoothVelocity, speedSmoothTime * Time.deltaTime);
-        
-        if(velocityY > -10) velocityY -=  Time.deltaTime * gravity;
-        Vector3 velocity = (dir  * currentSpeed) + Vector3.up * velocityY;
 
-        controller.Move(velocity * Time.deltaTime); 
-        
-        //anim.SetFloat("Movement", dir.magnitude, 0.1f, Time.deltaTime);
-        //anim.SetFloat("Horizontal", moveInput.x, 0.1f, Time.deltaTime);
-        //anim.SetFloat("Vertical", moveInput.y, 0.1f, Time.deltaTime);
+        if (velocityY > -10) velocityY -= Time.deltaTime * gravity;
+        Vector3 velocity = (dir * currentSpeed) + Vector3.up * velocityY;
+
+        controller.Move(velocity * Time.deltaTime);
     }
 
-    private void PlayerRotation(){
-        if(dir.magnitude == 0) return;
+    private void PlayerRotation()
+    {
+        if (dir.magnitude == 0) return;
         Vector3 rotDir = new Vector3(dir.x, dir.y, dir.z);
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir), Time.deltaTime * rotateSpeed);
+    }
+
+    public void RotateToAttackPosition(Vector3 attackPosition)
+    {
+        Vector3 direction = attackPosition - transform.position;
+        direction.y = 0;
+        if (direction != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(direction.normalized);
+        }
     }
 }
