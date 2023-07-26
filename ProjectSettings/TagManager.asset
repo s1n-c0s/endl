@@ -5,7 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - R1
+  - Enemy
+  - Zone
+  - CinemachineTarget
   layers:
   - Default
   - TransparentFX
