@@ -34,7 +34,13 @@ public class PlayerController : MonoBehaviour
     {
         GetInput();
         PlayerMovement();
-        if (!lockMovement) PlayerRotation();
+        if (!lockMovement)
+        {
+            if (moveInput.magnitude != 0)
+                PlayerRotation(); // Only rotate if there is movement input
+            else
+                FaceMouseClick(); // Call function to face the mouse click when there is no movement input
+        }
     }
 
     private void GetInput()
@@ -68,13 +74,19 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir), Time.deltaTime * rotateSpeed);
     }
 
-    public void RotateToAttackPosition(Vector3 attackPosition)
+    private void FaceMouseClick()
     {
-        Vector3 direction = attackPosition - transform.position;
-        direction.y = 0;
-        if (direction != Vector3.zero)
+        if (Input.GetMouseButtonDown(0))
         {
-            transform.rotation = Quaternion.LookRotation(direction.normalized);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                Vector3 lookDir = hit.point - transform.position;
+                lookDir.y = 0; // Keep the character upright
+                transform.rotation = Quaternion.LookRotation(lookDir);
+            }
         }
     }
 }

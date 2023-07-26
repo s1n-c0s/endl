@@ -17,25 +17,23 @@ public class PunchActive : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            punchZone.enabled = true; // เมื่อกดคลิกเมาส์ซ้าย เปิดใช้งาน GameObject punchZone
+            punchZone.enabled = true; // กดคลิกเมาส์ซ้าย เปิดใช้งาน GameObject punchZone
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            punchZone.enabled = false; ; // เมื่อปล่อยเมาส์ซ้าย ปิดใช้งาน GameObject punchZone
+            punchZone.enabled = false; ; // ปล่อยเมาส์ ปิดใช้งาน GameObject punchZone
         }
     }
 
-    private void OnTriggerEnter(Collider Zone)
+    private void OnTriggerEnter(Collider Zone)        // เมื่อ punchZone ชนกับ Collider ของ Enemy
     {
-        // เมื่อ punchZone เข้าสัมผัสกับ Collider ของ Enemy
-        // ตรวจสอบก่อนว่า GameObject ที่สัมผัสคือ Enemy หรือไม่
-        if (Zone.gameObject.CompareTag("Enemy"))
+        if (Zone.gameObject.CompareTag("Enemy"))// เช้กก่อนว่า GameObject ที่สัมผัสคือ Enemy หรือไม่
         {
-            Debug.Log("find Enemy");
+            Debug.Log("found Enemy");
             EnemyHealth enemyHealth = Zone.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                // ส่งคำขอให้ EnemyHealth ลดเลือด
+                //ขอให้สคริป EnemyHealth ลดเลือด
                 enemyHealth.TakeDamage(punchDamage);
                 Debug.Log("Enemy was hit! Damage: " + punchDamage);
             }

@@ -59,7 +59,7 @@ public class CombatController : MonoBehaviour
     }
 }*/
 
-using UnityEngine;
+/*using UnityEngine;
 
 public class CombatController : MonoBehaviour
 {
@@ -129,4 +129,4 @@ public class CombatController : MonoBehaviour
 
         Debug.Log("Player dealt " + attackDamage + " damage to the enemy. Enemy's remaining health: " + enemyHealth.GetCurrentHealth());
     }
-}
+}*/
