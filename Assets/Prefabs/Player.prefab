@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd11a6d7ed7b3aa4ebf546ee28a7a8c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  punchDamage: 20
+  PlayerData: {fileID: 11400000, guid: c2d8116351e65f443bc00122bbddbd9e, type: 2}
   punchZone: {fileID: 7234540919407433739}
 --- !u!1 &4360975376389658030
 GameObject:
@@ -316,6 +316,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9211196674511659969}
   - component: {fileID: 79030206375119858}
+  - component: {fileID: 5684910694422587745}
+  - component: {fileID: 6202689192102989447}
   - component: {fileID: 5428757957489560476}
   - component: {fileID: 1168988481716718395}
   m_Layer: 0
@@ -357,6 +359,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: c2d8116351e65f443bc00122bbddbd9e, type: 2}
   lockMovement: 0
+--- !u!114 &5684910694422587745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9033944864753135869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e81b124139666f546826df10061277a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerData: {fileID: 11400000, guid: c2d8116351e65f443bc00122bbddbd9e, type: 2}
+  EnemyData: {fileID: 11400000, guid: c23fc398eca6fc444ba2c0fcd6b89eb4, type: 2}
+--- !u!114 &6202689192102989447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9033944864753135869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b415219e1d1af1e46ba21978164279ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarImage: {fileID: 0}
+  isPlayerHealthBar: 1
 --- !u!136 &5428757957489560476
 CapsuleCollider:
   m_ObjectHideFlags: 0

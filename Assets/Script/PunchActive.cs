@@ -5,11 +5,13 @@ using UnityEngine;
 public class PunchActive : MonoBehaviour
 {
     //public GameObject punchZone;
-    public float punchDamage = 20f; // ความเสียหายที่จะก่อให้กับ Enemy
+    public PlayerData PlayerData;
+    private float punchDamage; // ความเสียหายที่จะก่อให้กับ Enemy
     public Collider punchZone;
 
     void Start()
     {
+        punchDamage = PlayerData.baseDamage;
         punchZone.enabled = false;
     }
 
@@ -30,7 +32,7 @@ public class PunchActive : MonoBehaviour
         if (Zone.gameObject.CompareTag("Enemy"))// เช้กก่อนว่า GameObject ที่สัมผัสคือ Enemy หรือไม่
         {
             Debug.Log("found Enemy");
-            EnemyHealth enemyHealth = Zone.GetComponent<EnemyHealth>();
+            IHealthBar enemyHealth = Zone.GetComponent<IHealthBar>();
             if (enemyHealth != null)
             {
                 //ขอให้สคริป EnemyHealth ลดเลือด
