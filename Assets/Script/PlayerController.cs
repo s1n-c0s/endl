@@ -14,15 +14,15 @@ public class PlayerController : MonoBehaviour
     Vector3 moveInput;
     Vector3 dir;
 
-    [Header("Settings")]
+    [Header("Player Data")]
+    public PlayerData playerData;
+
+    /*[Header("Settings")]
     [SerializeField] float gravity = 25f;
     [SerializeField] float moveSpeed = 2f;
-    [SerializeField] float rotateSpeed = 3f;
+    [SerializeField] float rotateSpeed = 3f;*/
 
     public bool lockMovement;
-
-    [Header("Player Data")]
-    private PlayerData playerData;
 
     void Start()
     {
@@ -59,9 +59,9 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMovement()
     {
-        currentSpeed = Mathf.SmoothDamp(currentSpeed, moveSpeed, ref speedSmoothVelocity, speedSmoothTime * Time.deltaTime);
+        currentSpeed = Mathf.SmoothDamp(currentSpeed, playerData.moveSpeed, ref speedSmoothVelocity, speedSmoothTime * Time.deltaTime);
 
-        if (velocityY > -10) velocityY -= Time.deltaTime * gravity;
+        if (velocityY > -10) velocityY -= Time.deltaTime * playerData.gravity;
         Vector3 velocity = (dir * currentSpeed) + Vector3.up * velocityY;
 
         controller.Move(velocity * Time.deltaTime);
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
     {
         if (dir.magnitude == 0) return;
         Vector3 rotDir = new Vector3(dir.x, dir.y, dir.z);
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir), Time.deltaTime * rotateSpeed);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir), Time.deltaTime * playerData.rotateSpeed);
     }
 
     private void FaceMouseClick()
