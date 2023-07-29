@@ -31,10 +31,13 @@ public class IHealthBar : MonoBehaviour
     public float TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
+
+        // If the health bar is for the player, clamp the health accordingly to player's max health.
         if (isPlayerHealthBar)
         {
             currentHealth = Mathf.Clamp(currentHealth, 0f, dataManager.PlayerData.maxHealth);
         }
+        // Otherwise, clamp the health to enemy's max health.
         else
         {
             currentHealth = Mathf.Clamp(currentHealth, 0f, dataManager.EnemyData.maxHealth);

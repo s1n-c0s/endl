@@ -3,7 +3,6 @@ using UnityEngine;
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance { get; private set; }
- 
     public PlayerData PlayerData;
     public EnemyData EnemyData;
 
@@ -16,10 +15,10 @@ public class DataManager : MonoBehaviour
         }
         else
         {
-           /* Destroy(gameObject);*/
+            //Destroy(gameObject);
             return;
         }
 
-        /*DontDestroyOnLoad(gameObject);*/
+        //DontDestroyOnLoad(gameObject);
     }
 }
