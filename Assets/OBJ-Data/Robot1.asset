@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Enemy
   maxHealth: 100
-  damage: 10
+  damage: 50
+  attackRange: 10
+  attackSpeed: 1
+  bulletLifeTime: 2
+  bulletDelay: 1
   enemyIcon: {fileID: 0}

@@ -266,7 +266,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9211196674511659969}
   - component: {fileID: 1282030599016351283}
-  - component: {fileID: 7098975159153896723}
   - component: {fileID: 5428757957489560476}
   - component: {fileID: 1168988481716718395}
   m_Layer: 6
@@ -308,20 +307,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarImage: {fileID: 3938498295794087716}
   isPlayerHealthBar: 0
---- !u!114 &7098975159153896723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9033944864753135869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e81b124139666f546826df10061277a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerData: {fileID: 11400000, guid: c2d8116351e65f443bc00122bbddbd9e, type: 2}
-  EnemyData: {fileID: 11400000, guid: c23fc398eca6fc444ba2c0fcd6b89eb4, type: 2}
 --- !u!136 &5428757957489560476
 CapsuleCollider:
   m_ObjectHideFlags: 0
