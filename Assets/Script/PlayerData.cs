@@ -9,12 +9,16 @@ public class PlayerData : ScriptableObject
     public float baseDamage = 10f;
 
     public float maxEnergy = 70f;
-    
+
     [Header("Speed")]
     public float moveSpeed = 15f;
     public float sprintSpeed = 20f;
     public float rotateSpeed = 5f;
 
     public float gravity = 25f;
-    public Sprite playerIcon; 
+    public Sprite playerIcon;
+
+    [Header("Dash")]
+    public float dashDistance = 10f;
+    public float dashTime = 0.3f;
 }
