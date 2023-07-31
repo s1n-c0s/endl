@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Zone
   - CinemachineTarget
+  - Wall
+  - Bullet
   layers:
   - Default
   - TransparentFX
