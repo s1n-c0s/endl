@@ -22,3 +22,5 @@ MonoBehaviour:
   playerIcon: {fileID: 0}
   dashDistance: 10
   dashTime: 0.3
+  jumpForce: 10
+  jumpGravityMultiplier: 3

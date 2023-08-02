@@ -1031,12 +1031,12 @@ PrefabInstance:
     - target: {fileID: 79030206375119858, guid: ea23d6d1de0fc3d4db928b6c4bbaeec0,
         type: 3}
       propertyPath: jumpForce
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 79030206375119858, guid: ea23d6d1de0fc3d4db928b6c4bbaeec0,
         type: 3}
       propertyPath: jumpGravityMultiplier
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2654861692723969300, guid: ea23d6d1de0fc3d4db928b6c4bbaeec0,
         type: 3}
