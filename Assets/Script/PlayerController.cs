@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         cam = Camera.main.transform;
 
-       dashDistance = playerData.dashDistance;
+        dashDistance = playerData.dashDistance;
         dashTime = playerData.dashTime;
 
     }
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         GetInput();
 
-        if (canDash && Input.GetKeyDown(KeyCode.LeftShift))
+        if (canDash && Input.GetKeyDown(KeyCode.Space))
         {
             if (!isDashing)
             {
@@ -61,9 +61,9 @@ public class PlayerController : MonoBehaviour
             if (!lockMovement)
             {
                 if (moveInput.magnitude != 0)
-                    PlayerRotation(); // Only rotate if there is movement input
+                    PlayerRotation(); //Rotate kae ton mee kan click mouse
                 else
-                    FaceMouseClick(); // Call function to face the mouse click when there is no movement input
+                    FaceMouseClick();
             }
         }
     }
@@ -80,6 +80,18 @@ public class PlayerController : MonoBehaviour
         right.Normalize();
 
         dir = (forward * moveInput.y + right * moveInput.x).normalized;
+
+        // Check for dash input
+        if (canDash && Input.GetKeyDown(KeyCode.Space))
+        {
+            if (dir.magnitude == 0)
+            {
+                // If no movement input, dash in the direction the player is facing
+                dir = transform.forward;
+            }
+
+            StartDash();
+        }
     }
 
     private void PlayerMovement()
@@ -109,7 +121,7 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Vector3 lookDir = hit.point - transform.position;
-                lookDir.y = 0; // Keep the character upright
+                lookDir.y = 0;
                 transform.rotation = Quaternion.LookRotation(lookDir);
             }
         }
