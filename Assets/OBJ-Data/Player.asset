@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   maxHealth: 100
-  damage: 10
-  gravity: 9
+  baseDamage: 10
+  maxEnergy: 70
   moveSpeed: 15
+  sprintSpeed: 20
   rotateSpeed: 5
+  gravity: 25
   playerIcon: {fileID: 0}
