@@ -21,7 +21,7 @@ public class PlayerData : ScriptableObject
     [Header("Dash")]
     public float dashDistance = 10f;
     public float dashTime = 0.3f;
-    public float dashCooldown = 1.0f;
-
+    //public float dashCooldown = 1.0f;
+    public float dashCooldownTime = 0.7f;
 
 }

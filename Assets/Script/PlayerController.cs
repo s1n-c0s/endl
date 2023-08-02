@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 dashDirection;
     public float dashDistance;
     public float dashTime;
+    public float dashCooldownTime;
+    private bool isDashingCooldown = false;
+    private float dashCooldown;
 
     public bool lockMovement;
 
@@ -35,14 +38,16 @@ public class PlayerController : MonoBehaviour
 
         dashDistance = playerData.dashDistance;
         dashTime = playerData.dashTime;
+        dashCooldownTime=playerData.dashCooldownTime;
+        //dashCooldown= playerData.dashCooldown;
 
-    }
+}
 
     void Update()
     {
         GetInput();
 
-        if (canDash && Input.GetKeyDown(KeyCode.Space))
+        if (canDash && !isDashingCooldown && Input.GetKeyDown(KeyCode.Space))
         {
             if (!isDashing)
             {
@@ -61,7 +66,7 @@ public class PlayerController : MonoBehaviour
             if (!lockMovement)
             {
                 if (moveInput.magnitude != 0)
-                    PlayerRotation(); //Rotate kae ton mee kan click mouse
+                    PlayerRotation();
                 else
                     FaceMouseClick();
             }
@@ -81,12 +86,10 @@ public class PlayerController : MonoBehaviour
 
         dir = (forward * moveInput.y + right * moveInput.x).normalized;
 
-        // Check for dash input
-        if (canDash && Input.GetKeyDown(KeyCode.Space))
+        if (canDash && !isDashingCooldown && Input.GetKeyDown(KeyCode.Space))
         {
             if (dir.magnitude == 0)
             {
-                // If no movement input, dash in the direction the player is facing
                 dir = transform.forward;
             }
 
@@ -133,6 +136,9 @@ public class PlayerController : MonoBehaviour
         isDashing = true;
         dashTimer = 0f;
         dashDirection = dir.normalized;
+
+        // Start the dash cooldown
+        StartCoroutine(DashCooldown());
     }
 
     private void UpdateDash()
@@ -146,5 +152,12 @@ public class PlayerController : MonoBehaviour
         {
             controller.Move(dashDirection * dashDistance / dashTime * Time.deltaTime);
         }
+    }
+
+    private IEnumerator DashCooldown()
+    {
+        isDashingCooldown = true;
+        yield return new WaitForSeconds(dashCooldownTime);
+        isDashingCooldown = false;
     }
 }
