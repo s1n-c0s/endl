@@ -24,6 +24,11 @@ public class ObjectPoolManager : MonoBehaviour
     }
     public static PoolType PoolingType;
 
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Awake()
     {
         SetupEmpties();
