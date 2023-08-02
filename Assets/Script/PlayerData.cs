@@ -21,4 +21,8 @@ public class PlayerData : ScriptableObject
     [Header("Dash")]
     public float dashDistance = 10f;
     public float dashTime = 0.3f;
+
+    [Header("Jump")]
+    public float jumpForce = 10f;
+    public float jumpGravityMultiplier = 2f;
 }

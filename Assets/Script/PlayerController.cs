@@ -26,6 +26,11 @@ public class PlayerController : MonoBehaviour
     public float dashDistance;
     public float dashTime;
 
+    [Header("Jump")]
+    public bool canJump = true;
+    public float jumpForce;
+    public float jumpGravityMultiplier;
+
     public bool lockMovement;
 
     void Start()
@@ -33,9 +38,9 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         cam = Camera.main.transform;
 
-       dashDistance = playerData.dashDistance;
+        dashDistance = playerData.dashDistance;
         dashTime = playerData.dashTime;
-
+        jumpForce = playerData.jumpForce;
     }
 
     void Update()
@@ -50,6 +55,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (canJump && controller.isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
+
         if (isDashing)
         {
             UpdateDash();
@@ -61,10 +71,20 @@ public class PlayerController : MonoBehaviour
             if (!lockMovement)
             {
                 if (moveInput.magnitude != 0)
-                    PlayerRotation(); // Only rotate if there is movement input
+                    PlayerRotation(); 
                 else
-                    FaceMouseClick(); // Call function to face the mouse click when there is no movement input
+                    FaceMouseClick(); 
             }
+        }
+
+        if (controller.isGrounded)
+        {
+            velocityY = -1f; 
+        }
+        else
+        {
+            
+            velocityY -= Time.deltaTime * playerData.gravity * jumpGravityMultiplier;
         }
     }
 
@@ -109,7 +129,7 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Vector3 lookDir = hit.point - transform.position;
-                lookDir.y = 0; // Keep the character upright
+                lookDir.y = 0; 
                 transform.rotation = Quaternion.LookRotation(lookDir);
             }
         }
@@ -134,5 +154,10 @@ public class PlayerController : MonoBehaviour
         {
             controller.Move(dashDirection * dashDistance / dashTime * Time.deltaTime);
         }
+    }
+
+    private void Jump()
+    {
+        velocityY = jumpForce;
     }
 }
