@@ -1229,7 +1229,7 @@ PrefabInstance:
     - target: {fileID: 1633420024512561260, guid: b54697cb42ec56b4eae4d5ba624627ca,
         type: 3}
       propertyPath: numBullets
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1633420024512561260, guid: b54697cb42ec56b4eae4d5ba624627ca,
         type: 3}

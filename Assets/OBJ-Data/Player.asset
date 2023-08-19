@@ -16,7 +16,9 @@ MonoBehaviour:
   baseDamage: 10
   maxEnergy: 70
   moveSpeed: 15
-  sprintSpeed: 20
+  sprintSpeed: 25
   rotateSpeed: 5
-  gravity: 25
+  gravity: 9
   playerIcon: {fileID: 0}
+  dashDistance: 10
+  dashTime: 0.3
