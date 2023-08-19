@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour
 {
-    public GameObject bulletPrefab;
-    public int numBullets = 8;
-    public float radius = 5f;
+    public GameObject bulletPrefab; // Prefab for the bullet GameObject
+    public int numBullets = 8; // Number of bullets to spawn
+    public float radius = 5f; // Radius of the circle where bullets are spawned
     public Vector3 centerOffset; // Local center point offset
-
-    public EnemyData enemyData; // Reference to the EnemyData
-
+    public EnemyData enemyData; // Reference to the EnemyData scriptable object
     public bool loop = false; // Whether to respawn bullets after all have been fired
 
     private WaitForSeconds respawnDelay; // Cached WaitForSeconds for respawn delay
+    private Transform bulletParent; // Parent object to hold bullets
 
     private void Awake()
     {
         respawnDelay = new WaitForSeconds(enemyData.attackSpeed);
+        bulletParent = new GameObject("Bullets").transform; // Create a new empty GameObject to hold all the spawned bullets
     }
 
     private void Start()
@@ -29,24 +29,20 @@ public class BulletSpawner : MonoBehaviour
         {
             float angle = i * (360f / numBullets);
             Vector3 spawnPosition = centerOffset + Quaternion.Euler(0f, angle, 0f) * (Vector3.forward * radius);
-
-            // Calculate the spawn rotation based on the angle
             Quaternion spawnRotation = Quaternion.Euler(0f, angle, 0f);
 
-            // Calculate the forward direction for the bullet (in local space)
-            Vector3 forwardDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-
-            // Spawn the bullet relative to the enemy's position and rotation
-            GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, transform.position + spawnPosition, transform.rotation * spawnRotation, ObjectPoolManager.PoolType.Bullet);
+            // Spawn the bullet using the ObjectPoolManager
+            GameObject bullet = ObjectPoolManager.SpawnObject(bulletPrefab, transform.position + spawnPosition, spawnRotation, ObjectPoolManager.PoolType.Bullet);
 
             if (bullet != null)
             {
-                // Set bullet properties directly on the BulletController component
+                // Get the BulletController component and set its properties
                 BulletController bulletController = bullet.GetComponent<BulletController>();
                 if (bulletController != null)
                 {
                     bulletController.bulletSpeed = enemyData.bulletSpeed;
-                    bulletController.SetBulletProperties(enemyData.damage, forwardDirection, enemyData.bulletLifeTime);
+                    // Set bullet properties directly on the BulletController component
+                    bulletController.SetBulletProperties(enemyData.damage, spawnRotation * Vector3.forward, enemyData.bulletLifeTime);
                 }
             }
         }
@@ -60,9 +56,8 @@ public class BulletSpawner : MonoBehaviour
 
     private void RespawnBullets()
     {
-        // Return all bullets to the pool
-        BulletController[] bullets = FindObjectsOfType<BulletController>();
-        foreach (var bullet in bullets)
+        // Return all bullets to the pool by iterating through the bulletParent and calling ObjectPoolManager.ReturnObjectToPool
+        foreach (Transform bullet in bulletParent)
         {
             ObjectPoolManager.ReturnObjectToPool(bullet.gameObject);
         }
