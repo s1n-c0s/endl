@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     Vector3 moveInput;
     Vector3 dir;
 
+
     [Header("Player Data")]
     public PlayerData playerData;
 
@@ -29,8 +30,8 @@ public class PlayerController : MonoBehaviour
     private bool isDashingCooldown = false;
     private float dashCooldown;
 
-    private bool isMovementPaused = false;
-    public float movementPauseTime = 2f;
+    public bool lockMovement;
+    bool isMouseButtonDown = false;
 
     void Start()
     {
@@ -60,15 +61,39 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (!isMovementPaused)
+            if (!lockMovement)
             {
                 PlayerMovement();
 
                 if (moveInput.magnitude != 0)
                     PlayerRotation();
-                else
-                    FaceMouseClick();
             }
+        }
+
+        // Check if left mouse button is clicked
+        if (Input.GetMouseButtonDown(0))
+        {
+            isMouseButtonDown = true;
+            FaceMouseClick();
+        }
+        // Check if left mouse button is released
+        else if (Input.GetMouseButtonUp(0))
+        {
+            isMouseButtonDown = false;
+        }
+    }
+    private void FixedUpdate()
+    {
+        // Check if left mouse button is pressed
+        if (Input.GetMouseButton(0))
+        {
+            lockMovement = true;
+            isMouseButtonDown = true;
+        }
+        else
+        {
+            lockMovement = false;
+            isMouseButtonDown = false;
         }
     }
 
@@ -109,8 +134,15 @@ public class PlayerController : MonoBehaviour
     private void PlayerRotation()
     {
         if (dir.magnitude == 0) return;
-        Vector3 rotDir = new Vector3(dir.x, dir.y, dir.z);
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir), Time.deltaTime * playerData.rotateSpeed);
+
+        Vector3 rotDir = new Vector3(dir.x, 0, dir.z); // Ignore the vertical component
+        Quaternion targetRotation = Quaternion.LookRotation(rotDir); // Calculate target rotation
+
+        // Adjust the rotation speed based on your preference
+        float rotationSpeed = playerData.rotateSpeed * Time.deltaTime * 10;
+
+        // Apply the rotation more quickly using Slerp
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
     }
 
     private void FaceMouseClick()
@@ -125,9 +157,11 @@ public class PlayerController : MonoBehaviour
                 Vector3 lookDir = hit.point - transform.position;
                 lookDir.y = 0;
                 transform.rotation = Quaternion.LookRotation(lookDir);
-            }
 
-            PauseMovement();
+                // Move the player a little forward after clicking
+                Vector3 targetPosition = transform.position + transform.forward * playerData.moveDistanceOnClick;
+                controller.Move(targetPosition - transform.position);
+            }
         }
     }
 
@@ -160,17 +194,5 @@ public class PlayerController : MonoBehaviour
         isDashingCooldown = true;
         yield return new WaitForSeconds(dashCooldownTime);
         isDashingCooldown = false;
-    }
-
-    private void PauseMovement()
-    {
-        isMovementPaused = true;
-        StartCoroutine(ResumeMovement());
-    }
-
-    private IEnumerator ResumeMovement()
-    {
-        yield return new WaitForSeconds(movementPauseTime);
-        isMovementPaused = false;
     }
 }
