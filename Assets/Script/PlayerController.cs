@@ -29,7 +29,8 @@ public class PlayerController : MonoBehaviour
     private bool isDashingCooldown = false;
     private float dashCooldown;
 
-    public bool lockMovement;
+    private bool isMovementPaused = false;
+    public float movementPauseTime = 2f;
 
     void Start()
     {
@@ -38,10 +39,8 @@ public class PlayerController : MonoBehaviour
 
         dashDistance = playerData.dashDistance;
         dashTime = playerData.dashTime;
-        dashCooldownTime=playerData.dashCooldownTime;
-        //dashCooldown= playerData.dashCooldown;
-
-}
+        dashCooldownTime = playerData.dashCooldownTime;
+    }
 
     void Update()
     {
@@ -61,10 +60,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            PlayerMovement();
-
-            if (!lockMovement)
+            if (!isMovementPaused)
             {
+                PlayerMovement();
+
                 if (moveInput.magnitude != 0)
                     PlayerRotation();
                 else
@@ -127,6 +126,8 @@ public class PlayerController : MonoBehaviour
                 lookDir.y = 0;
                 transform.rotation = Quaternion.LookRotation(lookDir);
             }
+
+            PauseMovement();
         }
     }
 
@@ -159,5 +160,17 @@ public class PlayerController : MonoBehaviour
         isDashingCooldown = true;
         yield return new WaitForSeconds(dashCooldownTime);
         isDashingCooldown = false;
+    }
+
+    private void PauseMovement()
+    {
+        isMovementPaused = true;
+        StartCoroutine(ResumeMovement());
+    }
+
+    private IEnumerator ResumeMovement()
+    {
+        yield return new WaitForSeconds(movementPauseTime);
+        isMovementPaused = false;
     }
 }
