@@ -33,8 +33,11 @@ public class PlayerController : MonoBehaviour
     public bool lockMovement;
     bool isMouseButtonDown = false;
 
+    private Animator animator;
+
     void Start()
     {
+        animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         cam = Camera.main.transform;
 
