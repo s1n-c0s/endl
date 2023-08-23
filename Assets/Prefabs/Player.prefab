@@ -253,8 +253,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3453128171814495516}
   - {fileID: 4951028700792186689}
+  - {fileID: 3453128171814495516}
   m_Father: {fileID: 9211196674511659969}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6943214196637766275
@@ -362,6 +362,7 @@ MonoBehaviour:
   canDash: 1
   dashDistance: 0
   dashTime: 0
+  dashCooldownTime: 0
   lockMovement: 0
 --- !u!114 &6202689192102989447
 MonoBehaviour:

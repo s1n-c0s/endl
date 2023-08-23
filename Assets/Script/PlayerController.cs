@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     Vector3 moveInput;
     Vector3 dir;
 
+
     [Header("Player Data")]
     public PlayerData playerData;
 
@@ -25,24 +26,32 @@ public class PlayerController : MonoBehaviour
     private Vector3 dashDirection;
     public float dashDistance;
     public float dashTime;
+    public float dashCooldownTime;
+    private bool isDashingCooldown = false;
+    private float dashCooldown;
 
     public bool lockMovement;
+    bool isMouseButtonDown = false;
+
+    private bool isMoving = false;
+    private Animator animator;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         cam = Camera.main.transform;
 
-       dashDistance = playerData.dashDistance;
+        dashDistance = playerData.dashDistance;
         dashTime = playerData.dashTime;
-
+        dashCooldownTime = playerData.dashCooldownTime;
     }
 
     void Update()
     {
         GetInput();
 
-        if (canDash && Input.GetKeyDown(KeyCode.LeftShift))
+        if (canDash && !isDashingCooldown && Input.GetKeyDown(KeyCode.Space))
         {
             if (!isDashing)
             {
@@ -56,15 +65,41 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            PlayerMovement();
-
             if (!lockMovement)
             {
+                PlayerMovement();
+
                 if (moveInput.magnitude != 0)
-                    PlayerRotation(); // Only rotate if there is movement input
-                else
-                    FaceMouseClick(); // Call function to face the mouse click when there is no movement input
+                    PlayerRotation();
             }
+        }
+
+        // Check if left mouse button is clicked
+        if (Input.GetMouseButtonDown(0))
+        {
+            isMouseButtonDown = true;
+            FaceMouseClick();
+        }
+        // Check if left mouse button is released
+        else if (Input.GetMouseButtonUp(0))
+        {
+            isMouseButtonDown = false;
+        }
+
+        animator.SetBool("isMoving", isMoving);
+    }
+    private void FixedUpdate()
+    {
+        // Check if left mouse button is pressed
+        if (Input.GetMouseButton(0))
+        {
+            lockMovement = true;
+            isMouseButtonDown = true;
+        }
+        else
+        {
+            lockMovement = false;
+            isMouseButtonDown = false;
         }
     }
 
@@ -80,6 +115,17 @@ public class PlayerController : MonoBehaviour
         right.Normalize();
 
         dir = (forward * moveInput.y + right * moveInput.x).normalized;
+
+        if (canDash && !isDashingCooldown && Input.GetKeyDown(KeyCode.Space))
+        {
+            if (dir.magnitude == 0)
+            {
+                dir = transform.forward;
+            }
+
+            StartDash();
+        }
+        isMoving = dir.magnitude > 0;
     }
 
     private void PlayerMovement()
@@ -95,8 +141,15 @@ public class PlayerController : MonoBehaviour
     private void PlayerRotation()
     {
         if (dir.magnitude == 0) return;
-        Vector3 rotDir = new Vector3(dir.x, dir.y, dir.z);
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir), Time.deltaTime * playerData.rotateSpeed);
+
+        Vector3 rotDir = new Vector3(dir.x, 0, dir.z); // Ignore the vertical component
+        Quaternion targetRotation = Quaternion.LookRotation(rotDir); // Calculate target rotation
+
+        // Adjust the rotation speed based on your preference
+        float rotationSpeed = playerData.rotateSpeed * Time.deltaTime * 10;
+
+        // Apply the rotation more quickly using Slerp
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
     }
 
     private void FaceMouseClick()
@@ -109,8 +162,12 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Vector3 lookDir = hit.point - transform.position;
-                lookDir.y = 0; // Keep the character upright
+                lookDir.y = 0;
                 transform.rotation = Quaternion.LookRotation(lookDir);
+
+                // Move the player a little forward after clicking
+                Vector3 targetPosition = transform.position + transform.forward * playerData.moveDistanceOnClick;
+                controller.Move(targetPosition - transform.position);
             }
         }
     }
@@ -121,6 +178,9 @@ public class PlayerController : MonoBehaviour
         isDashing = true;
         dashTimer = 0f;
         dashDirection = dir.normalized;
+
+        // Start the dash cooldown
+        StartCoroutine(DashCooldown());
     }
 
     private void UpdateDash()
@@ -134,5 +194,12 @@ public class PlayerController : MonoBehaviour
         {
             controller.Move(dashDirection * dashDistance / dashTime * Time.deltaTime);
         }
+    }
+
+    private IEnumerator DashCooldown()
+    {
+        isDashingCooldown = true;
+        yield return new WaitForSeconds(dashCooldownTime);
+        isDashingCooldown = false;
     }
 }
