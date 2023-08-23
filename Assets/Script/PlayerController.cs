@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public bool lockMovement;
     bool isMouseButtonDown = false;
 
+    private bool isMoving = false;
     private Animator animator;
 
     void Start()
@@ -84,6 +85,8 @@ public class PlayerController : MonoBehaviour
         {
             isMouseButtonDown = false;
         }
+
+        animator.SetBool("isMoving", isMoving);
     }
     private void FixedUpdate()
     {
@@ -122,6 +125,7 @@ public class PlayerController : MonoBehaviour
 
             StartDash();
         }
+        isMoving = dir.magnitude > 0;
     }
 
     private void PlayerMovement()
