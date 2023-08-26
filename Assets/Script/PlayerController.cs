@@ -56,15 +56,18 @@ public class PlayerController : MonoBehaviour
             if (!isDashing)
             {
                 StartDash();
+                //animator.SetBool("isDash", true);
+                Debug.Log("Dodge Roll started!");
             }
         }
 
         if (isDashing)
         {
             UpdateDash();
+            //animator.SetBool("isDash", false);
         }
-        else
-        {
+        //else
+        //{
             if (!lockMovement)
             {
                 PlayerMovement();
@@ -72,21 +75,39 @@ public class PlayerController : MonoBehaviour
                 if (moveInput.magnitude != 0)
                     PlayerRotation();
             }
-        }
+        //}
 
-        // Check if left mouse button is clicked
+        
         if (Input.GetMouseButtonDown(0))
         {
             isMouseButtonDown = true;
             FaceMouseClick();
         }
-        // Check if left mouse button is released
+       
         else if (Input.GetMouseButtonUp(0))
         {
             isMouseButtonDown = false;
         }
 
-        animator.SetBool("isMoving", isMoving);
+        /*animator.SetBool("isMoving", isMoving);
+        Debug.Log("run started!");*/
+
+        if (isMoving && !isDashing)
+        {
+            animator.SetBool("isMoving", true);
+            animator.SetBool("isDash", false);
+        }
+        else if (!isMoving && !isDashing)
+        {
+            animator.SetBool("isMoving", false);
+            animator.SetBool("isDash", false);
+        }
+        else if (isDashing)
+        {
+            animator.SetBool("isMoving", false);
+            animator.SetBool("isDash", true);
+        }
+
     }
     private void FixedUpdate()
     {
@@ -136,19 +157,21 @@ public class PlayerController : MonoBehaviour
         Vector3 velocity = (dir * currentSpeed) + Vector3.up * velocityY;
 
         controller.Move(velocity * Time.deltaTime);
-    }
+        
 
+    }
+  
     private void PlayerRotation()
     {
         if (dir.magnitude == 0) return;
 
-        Vector3 rotDir = new Vector3(dir.x, 0, dir.z); // Ignore the vertical component
-        Quaternion targetRotation = Quaternion.LookRotation(rotDir); // Calculate target rotation
+        Vector3 rotDir = new Vector3(dir.x, 0, dir.z); 
+        Quaternion targetRotation = Quaternion.LookRotation(rotDir);
 
-        // Adjust the rotation speed based on your preference
+        
         float rotationSpeed = playerData.rotateSpeed * Time.deltaTime * 10;
 
-        // Apply the rotation more quickly using Slerp
+    
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
     }
 
@@ -165,7 +188,7 @@ public class PlayerController : MonoBehaviour
                 lookDir.y = 0;
                 transform.rotation = Quaternion.LookRotation(lookDir);
 
-                // Move the player a little forward after clicking
+                // Kayab pai kang nah
                 Vector3 targetPosition = transform.position + transform.forward * playerData.moveDistanceOnClick;
                 controller.Move(targetPosition - transform.position);
             }
@@ -179,7 +202,7 @@ public class PlayerController : MonoBehaviour
         dashTimer = 0f;
         dashDirection = dir.normalized;
 
-        // Start the dash cooldown
+        
         StartCoroutine(DashCooldown());
     }
 
