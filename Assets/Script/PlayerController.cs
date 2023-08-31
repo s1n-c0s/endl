@@ -188,9 +188,9 @@ public class PlayerController : MonoBehaviour
                 lookDir.y = 0;
                 transform.rotation = Quaternion.LookRotation(lookDir);
 
-                // Kayab pai kang nah
-                Vector3 targetPosition = transform.position + transform.forward * playerData.moveDistanceOnClick;
-                controller.Move(targetPosition - transform.position);
+                // Kayab pai kang nah when punch
+                /*Vector3 targetPosition = transform.position + transform.forward * playerData.moveDistanceOnClick;
+                controller.Move(targetPosition - transform.position);*/
             }
         }
     }
