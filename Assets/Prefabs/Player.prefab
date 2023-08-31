@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 896794117444968099}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.08, z: 1.28}
+  m_LocalPosition: {x: 0.074, y: -0.19499993, z: 1.12}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -52,8 +52,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.23007075, y: 0.28181133, z: 0.33302268}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.48366365, y: 0.34157178, z: 0.33302268}
+  m_Center: {x: -0.02191105, y: 0.02988019, z: 0}
 --- !u!114 &8001080589326673969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,8 +253,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3453128171814495516}
   - {fileID: 4951028700792186689}
+  - {fileID: 3453128171814495516}
   m_Father: {fileID: 9211196674511659969}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6943214196637766275
@@ -362,6 +362,7 @@ MonoBehaviour:
   canDash: 1
   dashDistance: 0
   dashTime: 0
+  dashCooldownTime: 0
   lockMovement: 0
 --- !u!114 &6202689192102989447
 MonoBehaviour:
@@ -465,7 +466,7 @@ Transform:
   m_GameObject: {fileID: 9078441652053907248}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.074, y: 1.275, z: 0.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
