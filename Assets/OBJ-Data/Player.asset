@@ -18,7 +18,8 @@ MonoBehaviour:
   moveSpeed: 15
   sprintSpeed: 25
   rotateSpeed: 5
-  gravity: 90
-  playerIcon: {fileID: 0}
+  gravity: 9
+  moveDistanceOnClick: 1.3
   dashDistance: 10
   dashTime: 0.3
+  dashCooldownTime: 0.7

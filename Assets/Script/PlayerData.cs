@@ -16,9 +16,13 @@ public class PlayerData : ScriptableObject
     public float rotateSpeed = 5f;
 
     public float gravity = 25f;
-    public Sprite playerIcon;
+    //public Sprite playerIcon;
+    public float moveDistanceOnClick;
 
     [Header("Dash")]
     public float dashDistance = 10f;
     public float dashTime = 0.3f;
+    //public float dashCooldown = 1.0f;
+    public float dashCooldownTime = 0.7f;
+
 }

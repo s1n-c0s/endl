@@ -9,8 +9,10 @@ public class PunchActive : MonoBehaviour
     private float punchDamage; // ความเสียหายที่จะก่อให้กับ Enemy
     public Collider punchZone;
 
+    private Animator animator;
     void Start()
     {
+        animator = GetComponent<Animator>();
         punchDamage = PlayerData.baseDamage;
         punchZone.enabled = false;
     }
@@ -20,10 +22,12 @@ public class PunchActive : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             punchZone.enabled = true; // กดคลิกเมาส์ซ้าย เปิดใช้งาน GameObject punchZone
+            animator.SetBool("isPunch",true);
         }
         else if (Input.GetMouseButtonUp(0))
         {
             punchZone.enabled = false; ; // ปล่อยเมาส์ ปิดใช้งาน GameObject punchZone
+            animator.SetBool("isPunch", false);
         }
     }
 
