@@ -5,38 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e482032e-9975-4397-8a70-653f53f74656" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.endl/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.endl/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3D/Qrig.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3D/Qrig.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/111.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/111.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/1hook.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/1hook.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/1idle.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/1idle.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/1roll.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/1roll.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/1run.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/1run.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/Idle.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/Idle.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/test-Cross-Punch-player 1.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/test-Cross-Punch-player 1.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/test-Cross-Punch-player 2.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/test-Cross-Punch-player 2.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/test-Cross-Punch-player.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/test-Cross-Punch-player.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/test-Dwarf-Idle-player.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/test-Dwarf-Idle-player.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/test-HookPunch-player.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/test-HookPunch-player.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/test-Sprint-player.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/raw Animaton/test-Sprint-player.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Material/character lp.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Material/character lp.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Material/Test.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Material/Test.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestMap.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestMap.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.polybrush/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.polybrush/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,6 +100,7 @@
       <updated>1692519567202</updated>
       <workItem from="1692519570907" duration="1985000" />
       <workItem from="1693505666460" duration="2875000" />
+      <workItem from="1693588720341" duration="681000" />
     </task>
     <servers />
   </component>
